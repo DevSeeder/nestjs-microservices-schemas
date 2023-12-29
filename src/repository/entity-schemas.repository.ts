@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import {
   EntitySchema,
   EntitySchemaDocument,
-} from 'src/schemas/entity-schemas.schema';
+} from '../schemas/entity-schemas.schema';
 
 @Injectable()
 export class EntitySchemasRepository extends MongooseRepository<

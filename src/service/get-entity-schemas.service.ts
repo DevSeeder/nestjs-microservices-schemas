@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
-import { EntitySchemasRepository } from 'src/repository/entity-schemas.repository';
-import { DependecyTokens, GLOBAL_ENTITY } from 'src/application/app.constants';
-import { EntitySchema } from 'src/schemas/entity-schemas.schema';
+import { EntitySchemasRepository } from '../repository/entity-schemas.repository';
+import { DependecyTokens, GLOBAL_ENTITY } from '../application/app.constants';
+import { EntitySchema } from '../schemas/entity-schemas.schema';
 
 @Injectable()
 export class GetEntitySchemaService extends AbstractService {

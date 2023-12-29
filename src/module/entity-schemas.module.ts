@@ -1,13 +1,13 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from 'src/application/app.constants';
-import { EntitySchemasRepository } from 'src/repository/entity-schemas.repository';
+import { DependecyTokens } from '../application/app.constants';
+import { EntitySchemasRepository } from '../repository/entity-schemas.repository';
 import {
   EntitySchema,
   EntitySchemasSchema,
-} from 'src/schemas/entity-schemas.schema';
-import { GetEntitySchemaService } from 'src/service/get-entity-schemas.service';
+} from '../schemas/entity-schemas.schema';
+import { GetEntitySchemaService } from '../service/get-entity-schemas.service';
 
 @Module({})
 export class EntitySchemasModule {
