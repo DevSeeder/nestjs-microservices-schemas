@@ -11,7 +11,7 @@ import { GetEntitySchemaService } from '../service/get-entity-schemas.service';
 
 @Module({})
 export class EntitySchemasModule {
-  static forRootAync(configuration): DynamicModule {
+  static forRootAync(configuration, projectKey: string): DynamicModule {
     return {
       module: EntitySchemasModule,
       imports: [
@@ -40,6 +40,10 @@ export class EntitySchemasModule {
             return await dataService.getAll();
           },
           inject: [GetEntitySchemaService],
+        },
+        {
+          provide: DependecyTokens.PROJECT_KEY,
+          useValue: projectKey,
         },
       ],
       exports: [
