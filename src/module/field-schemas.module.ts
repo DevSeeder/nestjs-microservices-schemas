@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from 'src/application';
-import { FieldSchemasRepository } from 'src/repository/field-schemas.repository';
+import { DependecyTokens } from '../application';
+import { FieldSchemasRepository } from '../repository/field-schemas.repository';
 import {
   FieldSchema,
   FieldSchemasSchema,
-} from 'src/schemas/field-schemas.schema';
-import { GetFieldSchemaService } from 'src/service/get-field-schemas.service';
+} from '../schemas/field-schemas.schema';
+import { GetFieldSchemaService } from '../service/get-field-schemas.service';
 
 @Module({
   imports: [

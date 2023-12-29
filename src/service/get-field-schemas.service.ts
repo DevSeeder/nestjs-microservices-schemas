@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
-import { FieldSchema } from 'src/schemas/field-schemas.schema';
-import { FieldSchemasRepository } from 'src/repository/field-schemas.repository';
-import { DependecyTokens, GLOBAL_ENTITY } from 'src/application';
+import { FieldSchema } from '../schemas/field-schemas.schema';
+import { FieldSchemasRepository } from '../repository/field-schemas.repository';
+import { DependecyTokens, GLOBAL_ENTITY } from '../application';
 
 @Injectable()
 export class GetFieldSchemaService extends AbstractService {
