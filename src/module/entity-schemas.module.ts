@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DependecyTokens } from 'src/application/app.constants';
 import { EntitySchemasRepository } from 'src/repository/entity-schemas.repository';
@@ -11,13 +11,21 @@ import { GetEntitySchemaService } from 'src/service/get-entity-schemas.service';
 
 @Module({})
 export class EntitySchemasModule {
-  static forRoot(configService: ConfigService): DynamicModule {
+  static forRootAync(configuration): DynamicModule {
     return {
       module: EntitySchemasModule,
       imports: [
-        MongooseModule.forRoot(
-          configService.get<string>('schemas.database.connection'),
-        ),
+        ConfigModule.forRoot({
+          isGlobal: true,
+          load: [configuration],
+        }),
+        MongooseModule.forRootAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('schemas.database.connection'),
+          }),
+        }),
         MongooseModule.forFeature([
           { name: EntitySchema.name, schema: EntitySchemasSchema },
         ]),
