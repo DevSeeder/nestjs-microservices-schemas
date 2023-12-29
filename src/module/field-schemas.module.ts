@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DependecyTokens } from '../application';
 import { FieldSchemasRepository } from '../repository/field-schemas.repository';
@@ -8,28 +8,37 @@ import {
 } from '../schemas/field-schemas.schema';
 import { GetFieldSchemaService } from '../service/get-field-schemas.service';
 
-@Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: FieldSchema.name, schema: FieldSchemasSchema },
-    ]),
-  ],
-  controllers: [],
-  providers: [
-    FieldSchemasRepository,
-    GetFieldSchemaService,
-    {
-      provide: DependecyTokens.FIELD_SCHEMA_DB,
-      useFactory: async (dataService: GetFieldSchemaService) => {
-        return await dataService.getAll();
-      },
-      inject: [GetFieldSchemaService],
-    },
-  ],
-  exports: [
-    FieldSchemasRepository,
-    GetFieldSchemaService,
-    DependecyTokens.FIELD_SCHEMA_DB,
-  ],
-})
-export class FieldSchemasModule {}
+@Module({})
+export class FieldSchemasModule {
+  static forRoot(projectKey: string): DynamicModule {
+    return {
+      module: FieldSchemasModule,
+      imports: [
+        MongooseModule.forFeature([
+          { name: FieldSchema.name, schema: FieldSchemasSchema },
+        ]),
+      ],
+      controllers: [],
+      providers: [
+        FieldSchemasRepository,
+        GetFieldSchemaService,
+        {
+          provide: DependecyTokens.FIELD_SCHEMA_DB,
+          useFactory: async (dataService: GetFieldSchemaService) => {
+            return await dataService.getAll();
+          },
+          inject: [GetFieldSchemaService],
+        },
+        {
+          provide: DependecyTokens.PROJECT_KEY,
+          useValue: projectKey,
+        },
+      ],
+      exports: [
+        FieldSchemasRepository,
+        GetFieldSchemaService,
+        DependecyTokens.FIELD_SCHEMA_DB,
+      ],
+    };
+  }
+}

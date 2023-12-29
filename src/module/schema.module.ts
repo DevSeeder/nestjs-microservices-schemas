@@ -1,7 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from '../application/app.constants';
 import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
 
@@ -22,17 +21,12 @@ export class SchemasModule {
             uri: config.get<string>('schemas.database.connection'),
           }),
         }),
-        EntitySchemasModule,
-        FieldSchemasModule,
+        EntitySchemasModule.forRoot(projectKey),
+        FieldSchemasModule.forRoot(projectKey),
       ],
       controllers: [],
-      providers: [
-        {
-          provide: DependecyTokens.PROJECT_KEY,
-          useValue: projectKey,
-        },
-      ],
-      exports: [DependecyTokens.PROJECT_KEY],
+      providers: [],
+      exports: [],
     };
   }
 }
