@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
-import { DependecyTokens } from '../application';
+import { DatabaseConnections, DependecyTokens } from '../application';
 import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
 
 @Module({})
@@ -22,6 +22,7 @@ export class SchemasModule {
           useFactory: async (config: ConfigService) => ({
             uri: config.get<string>('schemas.database.connection'),
           }),
+          connectionName: DatabaseConnections.SCHEMAS,
         }),
         EntitySchemasModule.forRoot(projectKey),
         FieldSchemasModule.forRoot(projectKey),

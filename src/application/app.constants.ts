@@ -1,4 +1,7 @@
 export const GLOBAL_ENTITY = 'global';
+export enum DatabaseConnections {
+  SCHEMAS = 'schemasConnection',
+}
 
 export enum DependecyTokens {
   PROJECT_KEY = 'PROJECT_KEY',

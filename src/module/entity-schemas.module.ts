@@ -1,6 +1,9 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from '../application/app.constants';
+import {
+  DatabaseConnections,
+  DependecyTokens,
+} from '../application/app.constants';
 import { EntitySchemasRepository } from '../repository/entity-schemas.repository';
 import {
   EntitySchema,
@@ -14,9 +17,10 @@ export class EntitySchemasModule {
     return {
       module: EntitySchemasModule,
       imports: [
-        MongooseModule.forFeature([
-          { name: EntitySchema.name, schema: EntitySchemasSchema },
-        ]),
+        MongooseModule.forFeature(
+          [{ name: EntitySchema.name, schema: EntitySchemasSchema }],
+          DatabaseConnections.SCHEMAS,
+        ),
       ],
       controllers: [],
       providers: [

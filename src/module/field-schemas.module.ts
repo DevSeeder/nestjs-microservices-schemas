@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from '../application';
+import { DatabaseConnections, DependecyTokens } from '../application';
 import { FieldSchemasRepository } from '../repository/field-schemas.repository';
 import {
   FieldSchema,
@@ -14,9 +14,10 @@ export class FieldSchemasModule {
     return {
       module: FieldSchemasModule,
       imports: [
-        MongooseModule.forFeature([
-          { name: FieldSchema.name, schema: FieldSchemasSchema },
-        ]),
+        MongooseModule.forFeature(
+          [{ name: FieldSchema.name, schema: FieldSchemasSchema }],
+          DatabaseConnections.SCHEMAS,
+        ),
       ],
       controllers: [],
       providers: [
