@@ -6,6 +6,7 @@ import {
   EntitySchema,
   EntitySchemaDocument,
 } from '../schemas/entity-schemas.schema';
+import { DatabaseConnections } from '../application';
 
 @Injectable()
 export class EntitySchemasRepository extends MongooseRepository<
@@ -13,7 +14,7 @@ export class EntitySchemasRepository extends MongooseRepository<
   EntitySchemaDocument
 > {
   constructor(
-    @InjectModel(EntitySchema.name)
+    @InjectModel(EntitySchema.name, DatabaseConnections.SCHEMAS)
     model: Model<EntitySchemaDocument>,
   ) {
     super(model);
