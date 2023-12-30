@@ -3,12 +3,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
-import { DatabaseConnections, DependecyTokens } from '../application';
+import { DatabaseConnections, SchemaDependecyTokens } from '../application';
 import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
 
 @Module({})
 export class SchemasModule {
-  static forRoot(configuration, projectKey: string): DynamicModule {
+  static forRootAync(configuration, projectKey: string): DynamicModule {
     return {
       module: SchemasModule,
       imports: [
@@ -30,14 +30,14 @@ export class SchemasModule {
       controllers: [],
       providers: [
         {
-          provide: DependecyTokens.FIELD_SCHEMA_DB,
+          provide: SchemaDependecyTokens.FIELD_SCHEMA_DB,
           useFactory: async (dataService: GetFieldSchemaService) => {
             return await dataService.getAll();
           },
           inject: [GetFieldSchemaService],
         },
         {
-          provide: DependecyTokens.ENTITY_SCHEMA_DB,
+          provide: SchemaDependecyTokens.ENTITY_SCHEMA_DB,
           useFactory: async (dataService: GetEntitySchemaService) => {
             return await dataService.getAll();
           },
@@ -45,8 +45,8 @@ export class SchemasModule {
         },
       ],
       exports: [
-        DependecyTokens.ENTITY_SCHEMA_DB,
-        DependecyTokens.FIELD_SCHEMA_DB,
+        SchemaDependecyTokens.ENTITY_SCHEMA_DB,
+        SchemaDependecyTokens.FIELD_SCHEMA_DB,
       ],
     };
   }

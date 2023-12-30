@@ -6,7 +6,7 @@ export enum DatabaseConnections {
   TRANSLATIONS = 'translationsConnection',
 }
 
-export enum DependecyTokens {
+export enum SchemaDependecyTokens {
   PROJECT_KEY = 'PROJECT_KEY',
   FIELD_SCHEMA_DB = 'FIELD_SCHEMA_DB',
   ENTITY_SCHEMA_DB = 'ENTITY_SCHEMA_DB',

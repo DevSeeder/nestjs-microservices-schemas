@@ -2,13 +2,14 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
 import { FieldSchema } from '../schemas/field-schemas.schema';
 import { FieldSchemasRepository } from '../repository/field-schemas.repository';
-import { DependecyTokens, GLOBAL_ENTITY } from '../application';
+import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../application';
 
 @Injectable()
 export class GetFieldSchemaService extends AbstractService {
   constructor(
     protected readonly repository: FieldSchemasRepository,
-    @Inject(DependecyTokens.PROJECT_KEY) protected readonly projectKey: string,
+    @Inject(SchemaDependecyTokens.PROJECT_KEY)
+    protected readonly projectKey: string,
   ) {
     super();
   }

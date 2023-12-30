@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DependecyTokens, GLOBAL_ENTITY } from '../../../application';
+import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../../../application';
 import { ServiceKeyTranslationsRepository } from '../../../translations/repository/service-key-translations.repository';
 import { ServiceKeyTranslation } from '../../../translations/schemas/service-key-translations.schema';
 
@@ -7,7 +7,8 @@ import { ServiceKeyTranslation } from '../../../translations/schemas/service-key
 export class GetServiceKeyTranslationService {
   constructor(
     protected readonly repository: ServiceKeyTranslationsRepository,
-    @Inject(DependecyTokens.PROJECT_KEY) protected readonly projectKey: string,
+    @Inject(SchemaDependecyTokens.PROJECT_KEY)
+    protected readonly projectKey: string,
   ) {}
 
   async getAll(): Promise<ServiceKeyTranslation[]> {

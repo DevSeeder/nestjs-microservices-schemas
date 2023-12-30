@@ -1,14 +1,18 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
 import { EntitySchemasRepository } from '../repository/entity-schemas.repository';
-import { DependecyTokens, GLOBAL_ENTITY } from '../application/app.constants';
+import {
+  SchemaDependecyTokens,
+  GLOBAL_ENTITY,
+} from '../application/app.constants';
 import { EntitySchema } from '../schemas/entity-schemas.schema';
 
 @Injectable()
 export class GetEntitySchemaService extends AbstractService {
   constructor(
     protected readonly repository: EntitySchemasRepository,
-    @Inject(DependecyTokens.PROJECT_KEY) protected readonly projectKey: string,
+    @Inject(SchemaDependecyTokens.PROJECT_KEY)
+    protected readonly projectKey: string,
   ) {
     super();
   }

@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DatabaseConnections, DependecyTokens } from '../application';
+import { DatabaseConnections, SchemaDependecyTokens } from '../application';
 import { FieldSchemasRepository } from '../repository/field-schemas.repository';
 import {
   FieldSchema,
@@ -24,7 +24,7 @@ export class FieldSchemasModule {
         FieldSchemasRepository,
         GetFieldSchemaService,
         {
-          provide: DependecyTokens.PROJECT_KEY,
+          provide: SchemaDependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
       ],

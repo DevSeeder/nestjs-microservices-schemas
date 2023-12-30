@@ -17,7 +17,7 @@ import {
 } from '../translations/schemas/service-key-translations.schema';
 import { GetTranslationService } from '../translations/service/get-translation.service';
 import { GetServiceKeyTranslationService } from '../translations/service/service-key/get-service-key-translations.service';
-import { DatabaseConnections, DependecyTokens } from '../application';
+import { DatabaseConnections, SchemaDependecyTokens } from '../application';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
@@ -58,14 +58,14 @@ export class TranslationsModule {
         GetTranslationService,
         GetServiceKeyTranslationService,
         {
-          provide: DependecyTokens.SERVICE_KEY_TRANSLATION_DB,
+          provide: SchemaDependecyTokens.SERVICE_KEY_TRANSLATION_DB,
           useFactory: async (dataService: GetServiceKeyTranslationService) => {
             return await dataService.getAll();
           },
           inject: [GetServiceKeyTranslationService],
         },
         {
-          provide: DependecyTokens.PROJECT_KEY,
+          provide: SchemaDependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
       ],
@@ -75,7 +75,7 @@ export class TranslationsModule {
         ServiceKeyTranslationsRepository,
         GetTranslationService,
         GetServiceKeyTranslationService,
-        DependecyTokens.SERVICE_KEY_TRANSLATION_DB,
+        SchemaDependecyTokens.SERVICE_KEY_TRANSLATION_DB,
       ],
     };
   }

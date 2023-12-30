@@ -7,7 +7,7 @@ import { REQUEST } from '@nestjs/core';
 import { FieldTranslation } from '../schemas/field-translations.schema';
 import {
   DEFAULT_LANG,
-  DependecyTokens,
+  SchemaDependecyTokens,
   GLOBAL_ENTITY,
 } from '../../application';
 import { NotFoundException } from '@devseeder/microservices-exceptions';
@@ -18,10 +18,10 @@ export class GetTranslationService extends AbstractService {
   constructor(
     protected readonly fieldRepository: FieldTranslationsRepository,
     protected readonly entityRepository: EntityTranslationsRepository,
-    @Inject(DependecyTokens.SERVICE_KEY_TRANSLATION_DB)
+    @Inject(SchemaDependecyTokens.SERVICE_KEY_TRANSLATION_DB)
     protected readonly serviceKeyTranslation: ServiceKeyTranslation[],
     @Inject(REQUEST) private request: Request,
-    @Inject(DependecyTokens.PROJECT_KEY) private projectKey: string,
+    @Inject(SchemaDependecyTokens.PROJECT_KEY) private projectKey: string,
   ) {
     super();
   }

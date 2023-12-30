@@ -2,7 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
   DatabaseConnections,
-  DependecyTokens,
+  SchemaDependecyTokens,
 } from '../application/app.constants';
 import { EntitySchemasRepository } from '../repository/entity-schemas.repository';
 import {
@@ -27,7 +27,7 @@ export class EntitySchemasModule {
         EntitySchemasRepository,
         GetEntitySchemaService,
         {
-          provide: DependecyTokens.PROJECT_KEY,
+          provide: SchemaDependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
       ],

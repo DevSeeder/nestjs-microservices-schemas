@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DatabaseConnections, DependecyTokens } from '../application';
+import { DatabaseConnections, SchemaDependecyTokens } from '../application';
 import { ErrorSchemasRepository } from '../repository/error-schemas.repository';
 import {
   ErrorSchema,
@@ -20,21 +20,21 @@ export class ErrorSchemasModule {
           [{ name: ErrorSchema.name, schema: ErrorSchemasSchema }],
           DatabaseConnections.SCHEMAS,
         ),
-        TranslationsModule.forRoot(projectKey, configuration),
+        TranslationsModule.forRoot(configuration, projectKey),
       ],
       controllers: [],
       providers: [
         ErrorSchemasRepository,
         GetErrorSchemaService,
         {
-          provide: DependecyTokens.ERROR_SCHEMA_DB,
+          provide: SchemaDependecyTokens.ERROR_SCHEMA_DB,
           useFactory: async (dataService: GetErrorSchemaService) => {
             return await dataService.getAll();
           },
           inject: [GetErrorSchemaService],
         },
         {
-          provide: DependecyTokens.PROJECT_KEY,
+          provide: SchemaDependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
         ErrorService,
@@ -43,7 +43,7 @@ export class ErrorSchemasModule {
         ErrorSchemasRepository,
         GetErrorSchemaService,
         ErrorService,
-        DependecyTokens.ERROR_SCHEMA_DB,
+        SchemaDependecyTokens.ERROR_SCHEMA_DB,
       ],
     };
   }

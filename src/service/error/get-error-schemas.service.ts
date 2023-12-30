@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DependecyTokens, GLOBAL_ENTITY } from '../../application';
+import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../../application';
 import { ErrorSchemasRepository } from '../../repository/error-schemas.repository';
 import { ErrorSchema } from '../../schemas/error-schemas.schema';
 
@@ -7,7 +7,8 @@ import { ErrorSchema } from '../../schemas/error-schemas.schema';
 export class GetErrorSchemaService {
   constructor(
     protected readonly repository: ErrorSchemasRepository,
-    @Inject(DependecyTokens.PROJECT_KEY) private readonly projectKey: string,
+    @Inject(SchemaDependecyTokens.PROJECT_KEY)
+    private readonly projectKey: string,
   ) {}
   async getAll(): Promise<ErrorSchema[]> {
     const itens = await this.repository.find(

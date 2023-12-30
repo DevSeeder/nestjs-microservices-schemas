@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
 
 import { NotFoundException } from '@devseeder/microservices-exceptions';
-import { DependecyTokens } from '../../application';
+import { SchemaDependecyTokens } from '../../application';
 import { ErrorSchema } from '../../schemas/error-schemas.schema';
 import { GetTranslationService } from '../../translations';
 import { ErrorSchemaException } from '../../exceptions/error-schema.exception';
@@ -10,7 +10,7 @@ import { ErrorSchemaException } from '../../exceptions/error-schema.exception';
 @Injectable()
 export class ErrorService extends AbstractService {
   constructor(
-    @Inject(DependecyTokens.ERROR_SCHEMA_DB)
+    @Inject(SchemaDependecyTokens.ERROR_SCHEMA_DB)
     protected readonly errors: ErrorSchema[],
     protected readonly translationService: GetTranslationService,
   ) {
