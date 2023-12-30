@@ -27,11 +27,7 @@ export class EntitySchemasModule {
           useValue: projectKey,
         },
       ],
-      exports: [
-        EntitySchemasRepository,
-        GetEntitySchemaService,
-        DependecyTokens.ENTITY_SCHEMA_DB,
-      ],
+      exports: [EntitySchemasRepository, GetEntitySchemaService],
     };
   }
 }
