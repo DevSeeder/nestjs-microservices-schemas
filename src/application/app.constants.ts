@@ -1,4 +1,6 @@
 export const GLOBAL_ENTITY = 'global';
+export const DEFAULT_LANG = 'pt-BR';
+
 export enum DatabaseConnections {
   SCHEMAS = 'schemasConnection',
 }
