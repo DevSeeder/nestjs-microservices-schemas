@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
-import { DependecyTokens } from 'src/application';
+import { DependecyTokens } from '../application';
 
 @Module({})
 export class SchemasModule {
