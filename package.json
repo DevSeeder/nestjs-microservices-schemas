@@ -1,6 +1,6 @@
 {
   "name": "@devseeder/nestjs-microservices-schemas",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "NestJS Schema Package for DevSeeder projects",
   "author": "Maick Speck <maick@devseeder.com>",
   "license": "MIT",

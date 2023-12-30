@@ -5,7 +5,6 @@ import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
 import { DatabaseConnections, DependecyTokens } from '../application';
 import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
-import { TranslationsModule } from './translation.module';
 
 @Module({})
 export class SchemasModule {
@@ -28,7 +27,6 @@ export class SchemasModule {
 
         EntitySchemasModule.forRoot(projectKey),
         FieldSchemasModule.forRoot(projectKey),
-        TranslationsModule.forRoot(projectKey),
       ],
       controllers: [],
       providers: [
