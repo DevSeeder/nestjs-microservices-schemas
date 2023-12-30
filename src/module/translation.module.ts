@@ -22,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class TranslationsModule {
-  static forRootAsync(configuration, projectKey: string): DynamicModule {
+  static forRoot(configuration, projectKey: string): DynamicModule {
     return {
       module: TranslationsModule,
       imports: [

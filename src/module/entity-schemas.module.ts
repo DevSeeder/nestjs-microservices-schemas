@@ -13,7 +13,7 @@ import { GetEntitySchemaService } from '../service/get-entity-schemas.service';
 
 @Module({})
 export class EntitySchemasModule {
-  static forRootAsync(projectKey: string): DynamicModule {
+  static forRoot(projectKey: string): DynamicModule {
     return {
       module: EntitySchemasModule,
       imports: [

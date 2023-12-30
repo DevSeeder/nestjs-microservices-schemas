@@ -12,7 +12,7 @@ import { TranslationsModule } from './translation.module';
 
 @Module({})
 export class ErrorSchemasModule {
-  static forRootAsync(configuration, projectKey: string): DynamicModule {
+  static forRoot(configuration, projectKey: string): DynamicModule {
     return {
       module: ErrorSchemasModule,
       imports: [
@@ -20,7 +20,7 @@ export class ErrorSchemasModule {
           [{ name: ErrorSchema.name, schema: ErrorSchemasSchema }],
           DatabaseConnections.SCHEMAS,
         ),
-        TranslationsModule.forRootAsync(projectKey, configuration),
+        TranslationsModule.forRoot(projectKey, configuration),
       ],
       controllers: [],
       providers: [

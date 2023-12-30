@@ -10,7 +10,7 @@ import { GetFieldSchemaService } from '../service/get-field-schemas.service';
 
 @Module({})
 export class FieldSchemasModule {
-  static forRootAsync(projectKey: string): DynamicModule {
+  static forRoot(projectKey: string): DynamicModule {
     return {
       module: FieldSchemasModule,
       imports: [
