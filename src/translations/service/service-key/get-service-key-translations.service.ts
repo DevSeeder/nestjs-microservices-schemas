@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DependecyTokens, GLOBAL_ENTITY } from 'src/application';
-import { ServiceKeyTranslationsRepository } from 'src/translations/repository/service-key-translations.repository';
-import { ServiceKeyTranslation } from 'src/translations/schemas/service-key-translations.schema';
+import { DependecyTokens, GLOBAL_ENTITY } from '../../../application';
+import { ServiceKeyTranslationsRepository } from '../../../translations/repository/service-key-translations.repository';
+import { ServiceKeyTranslation } from '../../../translations/schemas/service-key-translations.schema';
 
 @Injectable()
 export class GetServiceKeyTranslationService {
