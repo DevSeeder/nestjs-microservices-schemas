@@ -6,6 +6,7 @@ import {
   EntityTranslationDocument,
 } from '../schemas/entity-translations.schema';
 import { MongooseRepository } from '@devseeder/nestjs-microservices-commons';
+import { DatabaseConnections } from '../../application';
 
 @Injectable()
 export class EntityTranslationsRepository extends MongooseRepository<
@@ -13,7 +14,7 @@ export class EntityTranslationsRepository extends MongooseRepository<
   EntityTranslationDocument
 > {
   constructor(
-    @InjectModel(EntityTranslation.name)
+    @InjectModel(EntityTranslation.name, DatabaseConnections.TRANSLATIONS)
     model: Model<EntityTranslationDocument>,
   ) {
     super(model);

@@ -6,6 +6,7 @@ import {
   ServiceKeyTranslation,
   ServiceKeyTranslationDocument,
 } from '../schemas/service-key-translations.schema';
+import { DatabaseConnections } from '../../application';
 
 @Injectable()
 export class ServiceKeyTranslationsRepository extends MongooseRepository<
@@ -13,7 +14,7 @@ export class ServiceKeyTranslationsRepository extends MongooseRepository<
   ServiceKeyTranslationDocument
 > {
   constructor(
-    @InjectModel(ServiceKeyTranslation.name)
+    @InjectModel(ServiceKeyTranslation.name, DatabaseConnections.TRANSLATIONS)
     model: Model<ServiceKeyTranslationDocument>,
   ) {
     super(model);

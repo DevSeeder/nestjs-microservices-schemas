@@ -6,6 +6,7 @@ import {
   ErrorSchema,
   ErrorSchemaDocument,
 } from '../schemas/error-schemas.schema';
+import { DatabaseConnections } from '../application';
 
 @Injectable()
 export class ErrorSchemasRepository extends MongooseRepository<
@@ -13,7 +14,7 @@ export class ErrorSchemasRepository extends MongooseRepository<
   ErrorSchemaDocument
 > {
   constructor(
-    @InjectModel(ErrorSchema.name)
+    @InjectModel(ErrorSchema.name, DatabaseConnections.SCHEMAS)
     model: Model<ErrorSchemaDocument>,
   ) {
     super(model);

@@ -3,6 +3,7 @@ export const DEFAULT_LANG = 'pt-BR';
 
 export enum DatabaseConnections {
   SCHEMAS = 'schemasConnection',
+  TRANSLATIONS = 'translationsConnection',
 }
 
 export enum DependecyTokens {

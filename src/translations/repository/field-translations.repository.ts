@@ -6,6 +6,7 @@ import {
   FieldTranslation,
   FieldTranslationDocument,
 } from '../schemas/field-translations.schema';
+import { DatabaseConnections } from '../../application';
 
 @Injectable()
 export class FieldTranslationsRepository extends MongooseRepository<
@@ -13,7 +14,7 @@ export class FieldTranslationsRepository extends MongooseRepository<
   FieldTranslationDocument
 > {
   constructor(
-    @InjectModel(FieldTranslation.name)
+    @InjectModel(FieldTranslation.name, DatabaseConnections.TRANSLATIONS)
     model: Model<FieldTranslationDocument>,
   ) {
     super(model);

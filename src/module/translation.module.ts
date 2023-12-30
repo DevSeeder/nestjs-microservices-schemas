@@ -17,22 +17,38 @@ import {
 } from '../translations/schemas/service-key-translations.schema';
 import { GetTranslationService } from '../translations/service/get-translation.service';
 import { GetServiceKeyTranslationService } from '../translations/service/service-key/get-service-key-translations.service';
-import { DependecyTokens } from '../application';
+import { DatabaseConnections, DependecyTokens } from '../application';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class TranslationsModule {
-  static forRoot(projectKey: string): DynamicModule {
+  static forRoot(projectKey: string, configuration): DynamicModule {
     return {
       module: TranslationsModule,
       imports: [
-        MongooseModule.forFeature([
-          { name: FieldTranslation.name, schema: FieldTranslationsSchema },
-          { name: EntityTranslation.name, schema: EntityTranslationsSchema },
-          {
-            name: ServiceKeyTranslation.name,
-            schema: ServiceKeyTranslationsSchema,
-          },
-        ]),
+        ConfigModule.forRoot({
+          isGlobal: true,
+          load: [configuration],
+        }),
+        MongooseModule.forRootAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('schemas.database.connection'),
+          }),
+          connectionName: DatabaseConnections.TRANSLATIONS,
+        }),
+        MongooseModule.forFeature(
+          [
+            { name: FieldTranslation.name, schema: FieldTranslationsSchema },
+            { name: EntityTranslation.name, schema: EntityTranslationsSchema },
+            {
+              name: ServiceKeyTranslation.name,
+              schema: ServiceKeyTranslationsSchema,
+            },
+          ],
+          DatabaseConnections.TRANSLATIONS,
+        ),
       ],
       controllers: [],
       providers: [

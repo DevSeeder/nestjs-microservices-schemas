@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DependecyTokens } from '../application';
+import { DatabaseConnections, DependecyTokens } from '../application';
 import { ErrorSchemasRepository } from '../repository/error-schemas.repository';
 import {
   ErrorSchema,
@@ -12,14 +12,15 @@ import { TranslationsModule } from './translation.module';
 
 @Module({})
 export class ErrorSchemasModule {
-  static forRoot(projectKey: string): DynamicModule {
+  static forRoot(projectKey: string, configuration): DynamicModule {
     return {
       module: ErrorSchemasModule,
       imports: [
-        MongooseModule.forFeature([
-          { name: ErrorSchema.name, schema: ErrorSchemasSchema },
-        ]),
-        TranslationsModule.forRoot(projectKey),
+        MongooseModule.forFeature(
+          [{ name: ErrorSchema.name, schema: ErrorSchemasSchema }],
+          DatabaseConnections.SCHEMAS,
+        ),
+        TranslationsModule.forRoot(projectKey, configuration),
       ],
       controllers: [],
       providers: [

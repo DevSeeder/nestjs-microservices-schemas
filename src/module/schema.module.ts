@@ -24,7 +24,6 @@ export class SchemasModule {
           }),
           connectionName: DatabaseConnections.SCHEMAS,
         }),
-
         EntitySchemasModule.forRoot(projectKey),
         FieldSchemasModule.forRoot(projectKey),
       ],
