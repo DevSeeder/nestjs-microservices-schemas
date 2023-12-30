@@ -23,13 +23,6 @@ export class EntitySchemasModule {
         EntitySchemasRepository,
         GetEntitySchemaService,
         {
-          provide: DependecyTokens.ENTITY_SCHEMA_DB,
-          useFactory: async (dataService: GetEntitySchemaService) => {
-            return await dataService.getAll();
-          },
-          inject: [GetEntitySchemaService],
-        },
-        {
           provide: DependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },

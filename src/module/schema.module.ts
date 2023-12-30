@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { EntitySchemasModule } from './entity-schemas.module';
 import { FieldSchemasModule } from './field-schemas.module';
 import { DependecyTokens } from '../application';
+import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
 
 @Module({})
 export class SchemasModule {
@@ -26,7 +27,22 @@ export class SchemasModule {
         FieldSchemasModule.forRoot(projectKey),
       ],
       controllers: [],
-      providers: [],
+      providers: [
+        {
+          provide: DependecyTokens.FIELD_SCHEMA_DB,
+          useFactory: async (dataService: GetFieldSchemaService) => {
+            return await dataService.getAll();
+          },
+          inject: [GetFieldSchemaService],
+        },
+        {
+          provide: DependecyTokens.ENTITY_SCHEMA_DB,
+          useFactory: async (dataService: GetEntitySchemaService) => {
+            return await dataService.getAll();
+          },
+          inject: [GetEntitySchemaService],
+        },
+      ],
       exports: [
         DependecyTokens.ENTITY_SCHEMA_DB,
         DependecyTokens.FIELD_SCHEMA_DB,

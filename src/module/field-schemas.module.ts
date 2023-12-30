@@ -23,22 +23,11 @@ export class FieldSchemasModule {
         FieldSchemasRepository,
         GetFieldSchemaService,
         {
-          provide: DependecyTokens.FIELD_SCHEMA_DB,
-          useFactory: async (dataService: GetFieldSchemaService) => {
-            return await dataService.getAll();
-          },
-          inject: [GetFieldSchemaService],
-        },
-        {
           provide: DependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
       ],
-      exports: [
-        FieldSchemasRepository,
-        GetFieldSchemaService,
-        DependecyTokens.FIELD_SCHEMA_DB,
-      ],
+      exports: [FieldSchemasRepository, GetFieldSchemaService],
     };
   }
 }
