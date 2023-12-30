@@ -4,3 +4,4 @@ export * from './schemas';
 export * from './service';
 export * from './module';
 export * from './interface';
+export * from './translations';
