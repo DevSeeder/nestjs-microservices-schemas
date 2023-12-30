@@ -20,7 +20,7 @@ export class ErrorSchemasModule {
           [{ name: ErrorSchema.name, schema: ErrorSchemasSchema }],
           DatabaseConnections.SCHEMAS,
         ),
-        TranslationsModule.forRoot(projectKey, configuration),
+        TranslationsModule.forRootAsync(projectKey, configuration),
       ],
       controllers: [],
       providers: [
