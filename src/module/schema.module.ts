@@ -6,7 +6,6 @@ import { FieldSchemasModule } from './field-schemas.module';
 import { DatabaseConnections, DependecyTokens } from '../application';
 import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
 import { TranslationsModule } from './translation.module';
-import { GetServiceKeyTranslationService } from '../translations/service/service-key/get-service-key-translations.service';
 
 @Module({})
 export class SchemasModule {
@@ -46,13 +45,6 @@ export class SchemasModule {
             return await dataService.getAll();
           },
           inject: [GetEntitySchemaService],
-        },
-        {
-          provide: DependecyTokens.SERVICE_KEY_TRANSLATION_DB,
-          useFactory: async (dataService: GetServiceKeyTranslationService) => {
-            return await dataService.getAll();
-          },
-          inject: [GetServiceKeyTranslationService],
         },
       ],
       exports: [

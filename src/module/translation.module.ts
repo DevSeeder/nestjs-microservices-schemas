@@ -42,6 +42,13 @@ export class TranslationsModule {
         GetTranslationService,
         GetServiceKeyTranslationService,
         {
+          provide: DependecyTokens.SERVICE_KEY_TRANSLATION_DB,
+          useFactory: async (dataService: GetServiceKeyTranslationService) => {
+            return await dataService.getAll();
+          },
+          inject: [GetServiceKeyTranslationService],
+        },
+        {
           provide: DependecyTokens.PROJECT_KEY,
           useValue: projectKey,
         },
@@ -52,6 +59,7 @@ export class TranslationsModule {
         ServiceKeyTranslationsRepository,
         GetTranslationService,
         GetServiceKeyTranslationService,
+        DependecyTokens.SERVICE_KEY_TRANSLATION_DB,
       ],
     };
   }
