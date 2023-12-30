@@ -12,7 +12,7 @@ import { TranslationsModule } from './translation.module';
 
 @Module({})
 export class ErrorSchemasModule {
-  static forRoot(projectKey: string, configuration): DynamicModule {
+  static forRootAsync(configuration, projectKey: string): DynamicModule {
     return {
       module: ErrorSchemasModule,
       imports: [

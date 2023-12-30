@@ -22,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class TranslationsModule {
-  static forRoot(projectKey: string, configuration): DynamicModule {
+  static forRootAsync(configuration, projectKey: string): DynamicModule {
     return {
       module: TranslationsModule,
       imports: [
@@ -34,7 +34,7 @@ export class TranslationsModule {
           imports: [ConfigModule],
           inject: [ConfigService],
           useFactory: async (config: ConfigService) => ({
-            uri: config.get<string>('schemas.database.connection'),
+            uri: config.get<string>('translations.database.connection'),
           }),
           connectionName: DatabaseConnections.TRANSLATIONS,
         }),
