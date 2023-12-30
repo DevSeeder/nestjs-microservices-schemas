@@ -32,6 +32,10 @@ export class ErrorSchemasModule {
           },
           inject: [GetErrorSchemaService],
         },
+        {
+          provide: DependecyTokens.PROJECT_KEY,
+          useValue: projectKey,
+        },
         ErrorService,
       ],
       exports: [
