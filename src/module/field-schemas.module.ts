@@ -29,6 +29,7 @@ export class FieldSchemasModule {
           useFactory: async (config: ConfigService) => ({
             uri: config.get<string>('doc.projectKey'),
           }),
+          inject: [ConfigService],
         },
       ],
       exports: [FieldSchemasRepository, GetFieldSchemaService],
