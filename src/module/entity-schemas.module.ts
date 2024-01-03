@@ -10,10 +10,11 @@ import {
   EntitySchemasSchema,
 } from '../schemas/entity-schemas.schema';
 import { GetEntitySchemaService } from '../service/get-entity-schemas.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class EntitySchemasModule {
-  static forRoot(projectKey: string): DynamicModule {
+  static forRoot(): DynamicModule {
     return {
       module: EntitySchemasModule,
       imports: [
@@ -28,7 +29,9 @@ export class EntitySchemasModule {
         GetEntitySchemaService,
         {
           provide: SchemaDependecyTokens.PROJECT_KEY,
-          useValue: projectKey,
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('doc.projectKey'),
+          }),
         },
       ],
       exports: [EntitySchemasRepository, GetEntitySchemaService],

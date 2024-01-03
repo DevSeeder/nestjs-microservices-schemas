@@ -22,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class TranslationsModule {
-  static forRoot(configuration, projectKey: string): DynamicModule {
+  static forRoot(configuration): DynamicModule {
     return {
       module: TranslationsModule,
       imports: [
@@ -66,7 +66,9 @@ export class TranslationsModule {
         },
         {
           provide: SchemaDependecyTokens.PROJECT_KEY,
-          useValue: projectKey,
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('doc.projectKey'),
+          }),
         },
       ],
       exports: [

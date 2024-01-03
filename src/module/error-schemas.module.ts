@@ -9,18 +9,23 @@ import {
 import { ErrorService } from '../service/error/error.service';
 import { GetErrorSchemaService } from '../service/error/get-error-schemas.service';
 import { TranslationsModule } from './translation.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({})
 export class ErrorSchemasModule {
-  static forRoot(configuration, projectKey: string): DynamicModule {
+  static forRoot(configuration): DynamicModule {
     return {
       module: ErrorSchemasModule,
       imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+          load: [configuration],
+        }),
         MongooseModule.forFeature(
           [{ name: ErrorSchema.name, schema: ErrorSchemasSchema }],
           DatabaseConnections.SCHEMAS,
         ),
-        TranslationsModule.forRoot(configuration, projectKey),
+        TranslationsModule.forRoot(configuration),
       ],
       controllers: [],
       providers: [
@@ -35,7 +40,9 @@ export class ErrorSchemasModule {
         },
         {
           provide: SchemaDependecyTokens.PROJECT_KEY,
-          useValue: projectKey,
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('doc.projectKey'),
+          }),
         },
         ErrorService,
       ],

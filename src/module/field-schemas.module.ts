@@ -7,10 +7,11 @@ import {
   FieldSchemasSchema,
 } from '../schemas/field-schemas.schema';
 import { GetFieldSchemaService } from '../service/get-field-schemas.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({})
 export class FieldSchemasModule {
-  static forRoot(projectKey: string): DynamicModule {
+  static forRoot(): DynamicModule {
     return {
       module: FieldSchemasModule,
       imports: [
@@ -25,7 +26,9 @@ export class FieldSchemasModule {
         GetFieldSchemaService,
         {
           provide: SchemaDependecyTokens.PROJECT_KEY,
-          useValue: projectKey,
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get<string>('doc.projectKey'),
+          }),
         },
       ],
       exports: [FieldSchemasRepository, GetFieldSchemaService],

@@ -8,7 +8,7 @@ import { GetEntitySchemaService, GetFieldSchemaService } from '../service';
 
 @Module({})
 export class SchemasModule {
-  static forRootAsync(configuration, projectKey: string): DynamicModule {
+  static forRootAsync(configuration): DynamicModule {
     return {
       module: SchemasModule,
       imports: [
@@ -24,8 +24,8 @@ export class SchemasModule {
           }),
           connectionName: DatabaseConnections.SCHEMAS,
         }),
-        EntitySchemasModule.forRoot(projectKey),
-        FieldSchemasModule.forRoot(projectKey),
+        EntitySchemasModule.forRoot(),
+        FieldSchemasModule.forRoot(),
       ],
       controllers: [],
       providers: [
