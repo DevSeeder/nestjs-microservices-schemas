@@ -29,9 +29,8 @@ export class EntitySchemasModule {
         GetEntitySchemaService,
         {
           provide: SchemaDependecyTokens.PROJECT_KEY,
-          useFactory: async (config: ConfigService) => ({
-            uri: config.get<string>('doc.projectKey'),
-          }),
+          useFactory: async (config: ConfigService) =>
+            config.get<string>('doc.projectKey'),
           inject: [ConfigService],
         },
       ],
