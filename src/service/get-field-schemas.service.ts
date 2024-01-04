@@ -2,7 +2,11 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AbstractService } from '@devseeder/nestjs-microservices-commons';
 import { FieldSchema } from '../schemas/field-schemas.schema';
 import { FieldSchemasRepository } from '../repository/field-schemas.repository';
-import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../application';
+import {
+  SchemaDependecyTokens,
+  GLOBAL_ENTITY,
+  GLOBAL_PROJECT,
+} from '../application';
 
 @Injectable()
 export class GetFieldSchemaService extends AbstractService {
@@ -17,7 +21,9 @@ export class GetFieldSchemaService extends AbstractService {
   async search(entityLabels: string[]): Promise<FieldSchema[]> {
     const itens = await this.repository.find(
       {
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
         entity: {
           $in: [...entityLabels, GLOBAL_ENTITY],
         },

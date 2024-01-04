@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../../application';
+import { SchemaDependecyTokens, GLOBAL_PROJECT } from '../../application';
 import { ErrorSchemasRepository } from '../../repository/error-schemas.repository';
 import { ErrorSchema } from '../../schemas/error-schemas.schema';
 
@@ -14,7 +14,7 @@ export class GetErrorSchemaService {
     const itens = await this.repository.find(
       {
         projectKey: {
-          $in: [GLOBAL_ENTITY, this.projectKey],
+          $in: [GLOBAL_PROJECT, this.projectKey],
         },
       },
       { projectKey: 0 },

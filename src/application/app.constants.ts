@@ -1,6 +1,7 @@
 import { SearchEgineOperators } from '../interface';
 
 export const GLOBAL_ENTITY = 'global';
+export const GLOBAL_PROJECT = 'global';
 export const DEFAULT_LANG = 'pt-BR';
 
 export enum DatabaseConnections {
