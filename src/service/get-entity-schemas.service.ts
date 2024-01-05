@@ -4,6 +4,7 @@ import { EntitySchemasRepository } from '../repository/entity-schemas.repository
 import {
   SchemaDependecyTokens,
   GLOBAL_ENTITY,
+  GLOBAL_PROJECT,
 } from '../application/app.constants';
 import { EntitySchema } from '../schemas/entity-schemas.schema';
 
@@ -20,7 +21,9 @@ export class GetEntitySchemaService extends AbstractService {
   async search(entityLabels: string[]): Promise<EntitySchema[]> {
     const itens = await this.repository.find(
       {
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
         entity: {
           $in: [...entityLabels, GLOBAL_ENTITY],
         },
@@ -36,7 +39,9 @@ export class GetEntitySchemaService extends AbstractService {
   async getAll(): Promise<EntitySchema[]> {
     const itens = await this.repository.find(
       {
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
       },
       { projectKey: 0 },
       { order: 1 },

@@ -39,7 +39,9 @@ export class GetFieldSchemaService extends AbstractService {
   async getAll(): Promise<FieldSchema[]> {
     const itens = await this.repository.find(
       {
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
       },
       { projectKey: 0 },
       { order: 1 },
