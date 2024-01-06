@@ -57,7 +57,9 @@ export class GetFieldSchemaService extends AbstractService {
   ): Promise<Array<FieldSchema>> {
     this.logger.log(
       `Searching ${JSON.stringify({
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
         type: 'externalId',
         'externalRelation.service': entity,
         'externalRelation.clone': clone,
@@ -65,7 +67,9 @@ export class GetFieldSchemaService extends AbstractService {
     );
     const itens = await this.repository.find(
       {
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [this.projectKey, GLOBAL_PROJECT],
+        },
         type: 'externalId',
         'externalRelation.service': entity,
         'externalRelation.clone': clone,

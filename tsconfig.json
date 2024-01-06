@@ -13,6 +13,6 @@
     "baseUrl": "./",
     "noLib": false
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../nestjs-microservices-commons/src/module/auth-http.module.ts"],
   "exclude": ["node_modules"]
 }

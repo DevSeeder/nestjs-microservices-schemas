@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { SchemaDependecyTokens, GLOBAL_ENTITY } from '../../../application';
+import { SchemaDependecyTokens, GLOBAL_PROJECT } from '../../../application';
 import { ServiceKeyTranslationsRepository } from '../../../translations/repository/service-key-translations.repository';
 import { ServiceKeyTranslation } from '../../../translations/schemas/service-key-translations.schema';
 
@@ -15,7 +15,7 @@ export class GetServiceKeyTranslationService {
     const itens = await this.repository.find(
       {
         projectKey: {
-          $in: [GLOBAL_ENTITY, this.projectKey],
+          $in: [GLOBAL_PROJECT, this.projectKey],
         },
       },
       { projectKey: 0 },

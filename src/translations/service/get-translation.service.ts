@@ -9,6 +9,7 @@ import {
   DEFAULT_LANG,
   SchemaDependecyTokens,
   GLOBAL_ENTITY,
+  GLOBAL_PROJECT,
 } from '../../application';
 import { NotFoundException } from '@devseeder/microservices-exceptions';
 import { EntityTranslation } from '../schemas/entity-translations.schema';
@@ -32,7 +33,9 @@ export class GetTranslationService extends AbstractService {
   ): Promise<FieldTranslation> {
     this.logger.log(
       `Searching Field Translation ${JSON.stringify({
-        projectKey: this.projectKey,
+        projectKey: {
+          $in: [GLOBAL_PROJECT, this.projectKey],
+        },
         entity: {
           $in: [GLOBAL_ENTITY, ...entity],
         },
@@ -42,7 +45,9 @@ export class GetTranslationService extends AbstractService {
     );
 
     const items = await this.fieldRepository.find({
-      projectKey: this.projectKey,
+      projectKey: {
+        $in: [GLOBAL_PROJECT, this.projectKey],
+      },
       entity: {
         $in: [GLOBAL_ENTITY, ...entity],
       },
@@ -64,7 +69,9 @@ export class GetTranslationService extends AbstractService {
       })}`,
     );
     const items = await this.entityRepository.find({
-      projectKey: this.projectKey,
+      projectKey: {
+        $in: [GLOBAL_PROJECT, this.projectKey],
+      },
       key: entity,
       locale: this.getLang(),
     });
