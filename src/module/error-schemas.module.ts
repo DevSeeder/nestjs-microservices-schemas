@@ -38,12 +38,6 @@ export class ErrorSchemasModule {
           },
           inject: [GetErrorSchemaService],
         },
-        {
-          provide: SchemaDependecyTokens.PROJECT_KEY,
-          useFactory: async (config: ConfigService) =>
-            config.get<string>('doc.projectKey'),
-          inject: [ConfigService],
-        },
         ErrorService,
       ],
       exports: [

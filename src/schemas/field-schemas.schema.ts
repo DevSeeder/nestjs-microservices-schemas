@@ -39,7 +39,7 @@ export class FieldSchema {
   enumValues?: Array<string | number>;
 
   @Prop({ required: false })
-  itensType?: 'string' | 'number';
+  itensType?: 'string' | 'number' | 'object';
 
   @Prop({ required: false })
   searchEgines?: SearchEgineOperators[];
