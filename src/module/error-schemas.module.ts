@@ -32,6 +32,12 @@ export class ErrorSchemasModule {
         ErrorSchemasRepository,
         GetErrorSchemaService,
         {
+          provide: SchemaDependecyTokens.PROJECT_KEY,
+          useFactory: async (config: ConfigService) =>
+            config.get<string>('doc.projectKey'),
+          inject: [ConfigService],
+        },
+        {
           provide: SchemaDependecyTokens.ERROR_SCHEMA_DB,
           useFactory: async (dataService: GetErrorSchemaService) => {
             return await dataService.getAll();
